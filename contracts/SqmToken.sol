@@ -9,7 +9,7 @@ pragma solidity 0.4.24;
 /// @author Jeremias Grenzebach, GoldenAcre B.V.
 /// @dev This token contract is based on ERC777, pre-standard and ERC20 compatible.
 
-import { ERC820Implementer } from "../../External-Contracts/eip820/contracts/ERC820Implementer.sol";
+import { ERC820Implementer } from "../../External-Contracts/eip820/contracts/ERC820Implementer.sol";  //Rechange from Testnet-address
 import { GAccounts } from "./GAccounts.sol";
 import { SafeMath } from "../../External-Contracts/openzeppelin-solidity/contracts/math/SafeMath.sol";
 import { ERC20Token } from "../../External-Contracts/ERC777/contracts/ERC20Token.sol";
@@ -18,7 +18,7 @@ import { ERC777TokensSender } from "../../External-Contracts/ERC777/contracts/ER
 import { ERC777TokensRecipient } from "../../External-Contracts/ERC777/contracts/ERC777TokensRecipient.sol";
 
 
-contract SQM is GAccounts, ERC20Token, ERC777Token, ERC820Implementer {
+contract SqmToken is GAccounts, ERC20Token, ERC777Token, ERC820Implementer {
     using SafeMath for uint256;
 
     string private mName;
