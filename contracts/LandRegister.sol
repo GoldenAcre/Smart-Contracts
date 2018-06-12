@@ -33,7 +33,7 @@ contract LandRegister is GAccounts {
     importToken public sqmToken;
     
     
-    //mapping(uint256 => EntryInLandRegister) records;
+    //mapping(uint256 => EntryInLandRegister) landRecords;
     EntryInLandRegister[] public landRecords;
     
     struct EntryInLandRegister {
@@ -96,12 +96,12 @@ contract LandRegister is GAccounts {
         string _addressOfRegistrationOffice,
         string _geohash
     )
-        public onlyOwner returns (uint256 landID)
+        public onlyMinter returns (uint256 landID)
     {
         landEntryID = landRecords.length++;
         EntryInLandRegister storage e = landRecords[landEntryID];
         
-        e.entryHash = keccak256(_cadastreID, _coordinates, _coordinates, _sqmOrSQM, _ownedByGoldenAcre, _previousOwner, _dateOfPurchase, _addressOfRegistrationOffice, _geohash);
+        e.entryHash = keccak256(abi.encodePacked(_cadastreID, _coordinates, _sqmOrSQM, _ownedByGoldenAcre, _previousOwner, _dateOfPurchase, _addressOfRegistrationOffice, _geohash));
         e.cadastreID = _cadastreID;
         e.coordinates = _coordinates;
         e.sqmOrSQM = _sqmOrSQM;
@@ -120,8 +120,52 @@ contract LandRegister is GAccounts {
         return landEntryID;
     }
     
+    
+    function getLandEntry ( uint256 _landEntryID ) 
+        public view returns ( 
+            bytes32 entryHash, 
+            string cadastreID, 
+            uint256 coordinates, 
+            uint256 sqmOrSQM, 
+            bool ownedByGoldenAcre, 
+            string previousOwner,
+            uint256 dateOfPurchase,
+            uint256 dateAddedToRegister,
+            string addressOfRegistrationOffice,
+            string geohash
+
+        )
+    {
+       EntryInLandRegister storage e = landRecords[_landEntryID];
+       
+            entryHash = e.entryHash;
+            cadastreID = e.cadastreID;
+            coordinates = e.coordinates; 
+            sqmOrSQM = e.sqmOrSQM;
+            ownedByGoldenAcre = e.ownedByGoldenAcre; 
+            previousOwner = e.previousOwner;
+            dateOfPurchase = e.dateOfPurchase;
+            dateAddedToRegister = e.dateAddedToRegister;
+            addressOfRegistrationOffice = e.addressOfRegistrationOffice;
+            geohash = e.geohash;
+       
+       return (
+           entryHash, 
+           cadastreID, 
+           coordinates, 
+           sqmOrSQM, 
+           ownedByGoldenAcre, 
+           previousOwner, 
+           dateOfPurchase, 
+           dateAddedToRegister, 
+           addressOfRegistrationOffice, 
+           geohash
+        );
+    }
+    
+    
     function removeSoldLandEntry( uint256 _landEntryID )
-        public onlyOwner returns (bool removed)
+        public onlyMinter returns (bool removed)
     {
         EntryInLandRegister storage e = landRecords[_landEntryID];
         
