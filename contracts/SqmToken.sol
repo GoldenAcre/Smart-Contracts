@@ -18,6 +18,8 @@ import { ERC777TokensSender } from "../../External-Contracts/ERC777/contracts/ER
 import { ERC777TokensRecipient } from "../../External-Contracts/ERC777/contracts/ERC777TokensRecipient.sol";
 
 
+
+
 contract SqmToken is GAccounts, ERC20Token, ERC777Token, ERC820Implementer {
     using SafeMath for uint256;
 

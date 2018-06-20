@@ -28,9 +28,9 @@ contract importToken {
 
 contract LandRegister is GAccounts {
     
+    importToken public sqmToken;
     uint public numEntries;
     uint256 public landEntryID;    //unique identifier in land register
-    importToken public sqmToken;
     
     
     //mapping(uint256 => EntryInLandRegister) landRecords;
@@ -58,7 +58,7 @@ contract LandRegister is GAccounts {
     constructor()
     public
     {
-        
+
     }
     
         function () 
@@ -115,7 +115,7 @@ contract LandRegister is GAccounts {
         //ProposalAdded(proposalID, beneficiary, weiAmount, jobDescription);
         numEntries = landEntryID+1;
         
-        sqmToken.mint(_sqmOrSQM, "123");
+        //sqmToken.mint(_sqmOrSQM, "123");
 
         return landEntryID;
     }

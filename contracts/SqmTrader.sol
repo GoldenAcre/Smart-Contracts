@@ -41,7 +41,7 @@ contract SqmTrader is GAccounts {
     constructor()
     public
     {
-        EthPriceOfSqm = 1 finney;
+        EthPriceOfSqm = 1 finney;       //https://www.cryps.info/en/EUR_to_Finney/
         directTradeAllowed = true;
     }
     
@@ -62,8 +62,8 @@ contract SqmTrader is GAccounts {
     * @notice Price may only be set by trader account
     */
     
-    function setEtherPrice(uint256 _EthPriceOfSqm) public onlyTrader {
-        EthPriceOfSqm = _EthPriceOfSqm;
+    function setEtherPriceinFinney(uint256 _EthPriceOfSqmInFinney) public onlyTrader {
+        EthPriceOfSqm = _EthPriceOfSqmInFinney;
     }
     
     
